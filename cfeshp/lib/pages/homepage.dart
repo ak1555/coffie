@@ -1,5 +1,6 @@
 import 'package:cfeshp/components/mybottomnavbar.dart';
 import 'package:cfeshp/pages/cartpage.dart';
+import 'package:cfeshp/pages/products.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   int selectedpage =0;
 
   final List<Widget>pages=[
-    HomePage(),CartPage()
+    Products(),CartPage()
     ];
     
     void navigatebottombar(int index){
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor:Colors.brown.shade100,
       bottomNavigationBar: Mybottomnavbar(
         onTabChange: (index) => navigatebottombar(index),
       ),

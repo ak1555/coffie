@@ -8,16 +8,17 @@ class Mybottomnavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(left: 25,right: 25),
       child: GNav(
         onTabChange: (value) {
           return onTabChange!(value);
         },
         tabs: [
         GButton(icon: Icons.home,
-        text: "Home",)
+        text: "Home ",)
       ,
       GButton(icon: Icons.shop,
-      text: "Cart",)
+      text: "Cart ",)
       ]),
       
     );
