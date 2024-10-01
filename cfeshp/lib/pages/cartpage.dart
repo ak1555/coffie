@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
@@ -15,8 +17,9 @@ class _CartPageState extends State<CartPage> {
   void print_list(){
     if(mybox.get(1)!=null){
     setState(() {
+      // itemslist= json.decode(mybox.get(1));
       itemslist=mybox.get(1);
-      print("object");
+      print(itemslist);
     });
       }else{
         print("nop");
@@ -73,7 +76,7 @@ class _CartPageState extends State<CartPage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text("${itemslist[index]["name"].toString()}",
+                            Text("${itemslist[index]["name"]}",
                             style: TextStyle(
                               // color: const Color.fromARGB(255, 109, 29, 2),
                               fontSize: 20,
@@ -125,6 +128,7 @@ class _CartPageState extends State<CartPage> {
                                   style: TextStyle(fontWeight: FontWeight.bold),),
                                   SizedBox(width: 8,),
                                     IconButton(onPressed: () {
+                                      print(itemslist[index]["image"]);
                                     // setState(() {
                                     // items_list[index]["quantity"] ++;
                                     //   print(items_list[index]["quantity"]);
@@ -133,20 +137,21 @@ class _CartPageState extends State<CartPage> {
                                 ],
                               ),
                               SizedBox(height: 8,),
-                              // TextButton(
-                              //   style: TextButton.styleFrom(
-                              //     foregroundColor: const Color.fromARGB(255, 109, 29, 2),
-                              //     backgroundColor: Colors.amberAccent[200],
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  foregroundColor: const Color.fromARGB(255, 109, 29, 2),
+                                  backgroundColor: const Color.fromARGB(255, 143, 85, 37),
                                   
-                              //     // foregroundColor: Colors.white
-                              //   ),
-                              //   onPressed: () {
-                              //   //   setState(() {
-                              //   // choose_list.add(items_list[index]);
-                              //   // });
-                              //   // print(choose_list);
-                              //   // addtocart();
-                              // }, child: Text("Add to cart",style: TextStyle(fontWeight: FontWeight.bold),)),
+                                  // foregroundColor: Colors.white
+                                ),
+                                onPressed: () {
+                                //   setState(() {
+                                // choose_list.add(items_list[index]);
+                                // });
+                                // print(choose_list);
+                                // addtocart();
+                              }, child: Text("My Cart",style: TextStyle(fontWeight: FontWeight.bold,
+                              color: Colors.white),)),
                             ],
                           ),
                         )

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
@@ -16,22 +18,33 @@ class _ProductsState extends State<Products> {
     "price":50,
     "quantity":1,
     "image":"greentea.jpg"},
+
      {"name":"BRU Coffee",
-    "price":80,
+    "price":60,
     "quantity":1,
-    "image":"greentea.jpg"}
+    "image":"bru.jpg"},
+
+     {"name":"Horlicks Coffee",
+    "price":75,
+    "quantity":1,
+    "image":"horlicks.jpg"}
   ];
 
   List choose_list=[];
-  void addtocart(){
-    if(mybox.get(1)!=null){
-      List ls=mybox.get(1);
-      ls.add(choose_list);
-      mybox.put(1, ls);
-    }else{
-      mybox.put(1, choose_list);
 
-    }
+  void addtocart(){
+    // if(mybox.get(1)!=null){
+    // String data=mybox.get(1);
+    // List li=jsonDecode(data);
+    //   li.add(choose_list);
+    //   String add=json.encode(li);
+    //   mybox.put(1, add);
+    // }else{
+    //   String data=jsonEncode(choose_list);
+    //   mybox.put(1, data);
+    // }
+ mybox.put(1, choose_list);
+
   }
 
   @override
@@ -60,9 +73,10 @@ class _ProductsState extends State<Products> {
             width: double.infinity,
             alignment: Alignment.center,
             child: Text("COFFIEE CART",style: TextStyle(
-              color: Colors.brown[900],
+              color: const Color.fromARGB(255, 255, 103, 1),
+              fontFamily: "Pro",
               fontWeight: FontWeight.bold,
-              fontSize: 20,shadows: [Shadow(color: Colors.white,blurRadius: 5,offset: Offset(3, 3))],
+              fontSize: 20,shadows: [Shadow( color: Colors.white,blurRadius: 5,offset: Offset(1, 2))],
               letterSpacing: 1),
               ),
               ),
@@ -122,36 +136,41 @@ class _ProductsState extends State<Products> {
               ),
                SizedBox(height:10,),
               Container(
-                height: 350,
+                height: 435,
                 width: double.infinity,
-                padding: EdgeInsets.only(left: 15,right: 15),
+                padding: EdgeInsets.only(left: 5,right: 5),
                 child: ListView.builder(
                   itemCount: items_list.length,
                   itemBuilder: (context, index) {
                   return Container(
                     height: 130,
                     width: double.infinity,
-                    margin: EdgeInsets.only(top: 18),
+                    margin: EdgeInsets.only(top: 18,left: 17,right: 17),
                     padding: EdgeInsets.only(left: 15,right: 15),
                     decoration: BoxDecoration(
                       boxShadow: [BoxShadow(
-                        color: Colors.brown.shade200,
+                        color: const Color.fromARGB(255, 109, 86, 78),
                         blurRadius: 5,spreadRadius: 4,
                         offset: Offset(0,5)
                       )],
                       border: Border.all(width: 1,color: const Color.fromARGB(255, 156, 8, 8)),
                       borderRadius: BorderRadius.circular(15),
-                      color:  Colors.white
+                      // color:  const Color.fromARGB(255, 247, 230, 216)
+                      color: Colors.grey[50]
                     ),
-                    child: Row(children: [
+                    child: Row(
+                      children: [
                       Container(
-                        height: 110,
-                        width: 125,
+                        height: 113,
+                        width: 113,
+                        padding: EdgeInsets.all(1.9),
                         decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 143, 118, 109),
+                          boxShadow: [BoxShadow(color: Colors.brown,spreadRadius: 2,blurRadius: 5),],
+                          // color: const Color.fromARGB(255, 143, 118, 109),
+                          color: Colors.grey[100],
                         border: Border.all(),
-                        borderRadius: BorderRadius.circular(10)),
-                        child:ClipRRect(borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(100)),
+                        child:ClipRRect(borderRadius: BorderRadius.circular(100),
                           child: Image.asset("./images/${items_list[index]["image"]}",fit: BoxFit.cover,),),
                       ),
                       SizedBox(width: 10,),
@@ -197,35 +216,47 @@ class _ProductsState extends State<Products> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  IconButton(alignment: Alignment.topCenter,
-                                    onPressed: () {
+                              Container(
+                                margin: EdgeInsets.only(left: 25,right: 25,top: 6,bottom: 0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(width: 0.4),
+                                  borderRadius: BorderRadius.circular(50)
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    IconButton(alignment: Alignment.topCenter,
+                                      onPressed: () {
+                                        setState(() {
+                                         if( items_list[index]["quantity"]>1){
+                                           items_list[index]["quantity"] --;
+                                         }
+                                        });
+                                      
+                                    }, icon: Icon(Icons.minimize)),
+
+                                    SizedBox(width: 1,),
+
+                                    Text(items_list[index]["quantity"].toString(),
+                                    style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
+
+                                    SizedBox(width: 1,),
+
+                                      IconButton(onPressed: () {
                                       setState(() {
-                                       if( items_list[index]["quantity"]>1){
-                                         items_list[index]["quantity"] --;
-                                       }
+                                      items_list[index]["quantity"] ++;
+                                        print(items_list[index]["quantity"]);
                                       });
-                                    
-                                  }, icon: Icon(Icons.minimize)),
-                                  SizedBox(width: 8,),
-                                  Text(items_list[index]["quantity"].toString(),
-                                  style: TextStyle(fontWeight: FontWeight.bold),),
-                                  SizedBox(width: 8,),
-                                    IconButton(onPressed: () {
-                                    setState(() {
-                                    items_list[index]["quantity"] ++;
-                                      print(items_list[index]["quantity"]);
-                                    });
-                                  }, icon: Icon(Icons.add)),
-                                ],
+                                    }, icon: Icon(Icons.add)),
+                                  ],
+                                ),
                               ),
                               SizedBox(height: 8,),
                               TextButton(
                                 style: TextButton.styleFrom(
                                   foregroundColor: const Color.fromARGB(255, 109, 29, 2),
-                                  backgroundColor: Colors.amberAccent[200],
+                                  backgroundColor: const Color.fromARGB(255, 247, 184, 49),
                                   
                                   // foregroundColor: Colors.white
                                 ),
