@@ -14,17 +14,21 @@ class Products extends StatefulWidget {
 class _ProductsState extends State<Products> {
   final mybox = Hive.box('mybox');
   List items_list=[
-    {"name":"Green Tea",
+    {
+      "id":111,
+      "name":"Green Tea",
     "price":50,
     "quantity":1,
     "image":"greentea.jpg"},
 
-     {"name":"BRU Coffee",
+     {"id":222,
+      "name":"BRU Coffee",
     "price":60,
     "quantity":1,
     "image":"bru.jpg"},
 
-     {"name":"Horlicks Coffee",
+     {"id":333,
+      "name":"Horlicks Coffee",
     "price":75,
     "quantity":1,
     "image":"horlicks.jpg"}
@@ -32,19 +36,36 @@ class _ProductsState extends State<Products> {
 
   List choose_list=[];
 
-  void addtocart(){
-    // if(mybox.get(1)!=null){
-    // String data=mybox.get(1);
-    // List li=jsonDecode(data);
-    //   li.add(choose_list);
-    //   String add=json.encode(li);
-    //   mybox.put(1, add);
-    // }else{
-    //   String data=jsonEncode(choose_list);
-    //   mybox.put(1, data);
-    // }
- mybox.put(1, choose_list);
+  void takeToList(){
+    if(mybox.get(1)!=null){
+      setState(() {
+        choose_list=mybox.get(1);
+      });
+    }else{
+      print("empty hive");
+    }
+  }
 
+  void addtocart(){
+    mybox.put(1, choose_list);
+  }
+
+  void checkid(int a){
+    if(mybox.get(1)!=null){
+      setState(() {
+        choose_list=mybox.get(1);
+      });
+      int j = choose_list.length;
+      int count=0;
+      for(int i=0;i<=j;i++){
+        if(a==choose_list[count][0]){
+          print("same");
+        }else{
+
+              mybox.put(1, choose_list);
+        }
+      }
+    }
   }
 
   @override
@@ -122,7 +143,7 @@ class _ProductsState extends State<Products> {
                   children: [
                     SizedBox(height: 25),
                     Container(
-                      height: 50,
+                      height: 49,
                       width: double.infinity,
                       margin: EdgeInsets.only(left: 30,right: 30),
                       decoration: BoxDecoration(
@@ -219,43 +240,43 @@ class _ProductsState extends State<Products> {
                             //     Icon(Icons.coffee_maker_outlined,color: const Color.fromARGB(255, 150, 50, 13),size: 18,)
                             //   ],
                             // )
-                            Container(
-                              height: 45,
-                              width: 155,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(width: 0.4),
-                                  borderRadius: BorderRadius.circular(50)
-                                ),
-                              child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      IconButton(alignment: Alignment.topCenter,
-                                        onPressed: () {
-                                          setState(() {
-                                           if( items_list[index]["quantity"]>1){
-                                             items_list[index]["quantity"] --;
-                                           }
-                                          });
+                            // Container(
+                            //   height: 45,
+                            //   width: 155,
+                            //   decoration: BoxDecoration(
+                            //       color: Colors.white,
+                            //       border: Border.all(width: 0.4),
+                            //       borderRadius: BorderRadius.circular(50)
+                            //     ),
+                            //   child: Row(
+                            //         mainAxisAlignment: MainAxisAlignment.center,
+                            //         children: [
+                            //           IconButton(alignment: Alignment.topCenter,
+                            //             onPressed: () {
+                            //               setState(() {
+                            //                if( items_list[index]["quantity"]>1){
+                            //                  items_list[index]["quantity"] --;
+                            //                }
+                            //               });
                                         
-                                      }, icon: Icon(Icons.minimize)),
+                            //           }, icon: Icon(Icons.exposure_minus_1_outlined)),
                               
-                                      // SizedBox(width: 1,),
+                            //           // SizedBox(width: 1,),
                               
-                                      Text(items_list[index]["quantity"].toString(),
-                                      style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
+                            //           Text(items_list[index]["quantity"].toString(),
+                            //           style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
                               
-                                      // SizedBox(width: 1,),
+                            //           // SizedBox(width: 1,),
                               
-                                        IconButton(onPressed: () {
-                                        setState(() {
-                                        items_list[index]["quantity"] ++;
-                                          print(items_list[index]["quantity"]);
-                                        });
-                                      }, icon: Icon(Icons.add)),
-                                    ],
-                                  ),
-                            ),
+                            //             IconButton(onPressed: () {
+                            //             setState(() {
+                            //             items_list[index]["quantity"] ++;
+                            //               print(items_list[index]["quantity"]);
+                            //             });
+                            //           }, icon: Icon(Icons.exposure_plus_1)),
+                            //         ],
+                            //       ),
+                            // ),
                             // ======================row
                           ],
                         )),
@@ -330,11 +351,72 @@ class _ProductsState extends State<Products> {
                                   // foregroundColor: Colors.white
                                 ),
                                 onPressed: () {
-                                  setState(() {
-                                choose_list.add(items_list[index]);
-                                });
-                                print(choose_list);
-                                addtocart();
+// if(mybox.get(1)!=null){
+//   takeToList();
+//   if(choose_list[index]["id"]!=items_list[index]["id"]){
+//     print(items_list[index]["id"]);
+//   }
+// }
+// checkid(items_list[index]["id"]);
+
+
+ if(mybox.get(1)!=null){
+      setState(() {
+        choose_list=mybox.get(1);
+      });
+      int j = choose_list.length;
+      int count=0;
+      for(int i=0;i<=j;i++){
+        if(items_list[index]["id"]==choose_list[count]["id"]){
+          print("same");
+        }else{
+          setState(() {
+            choose_list.add(items_list[index]["id"]);
+          });
+              mybox.put(1, choose_list);
+        }
+        count++;
+      }
+      print(choose_list);
+    }else{
+      setState(() {
+            choose_list.add(items_list[index]["id"]);
+          });
+              mybox.put(1, choose_list);
+print(choose_list);
+    }
+
+
+
+
+
+                                //  if(mybox.get(1)!=null){
+                                //   print("bleach");
+                                //   takeToList();
+                                //   if(items_list[index]["id"]==choose_list[index]["id"]){
+                                //     showDialog(context: context, builder: (context) {
+                                //       return AlertDialog(
+                                //         title: Text("OOPS!!!"),
+                                //         content: Text("Item Already In Cart"),
+                                //       );
+                                //     },);
+                                //   }
+                                //   else{
+                                //     print("naruto");
+                                //     setState(() {   
+                                // choose_list.add(items_list[index]);
+                                // });
+                                //   addtocart();
+                                //   }
+                                //  }else{
+                                  
+                                //     setState(() {   
+                                // choose_list.add(items_list[index]);
+                                // });
+                                // addtocart();
+                                //  }
+                                // print(choose_list);
+                                
                               }, child: Text("To cart",style: TextStyle(fontWeight: FontWeight.bold),)),
                             ],
                           ),

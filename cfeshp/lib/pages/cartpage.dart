@@ -12,15 +12,17 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   final mybox=Hive.box('mybox');
-  List itemslist=[  {"name":"Green Tea",
-    "price":50,
-    "quantity":1,
-    "image":"greentea.jpg"},
+  List itemslist=[ 
+    //  {"name":"Green Tea",
+    // "price":50,
+    // "quantity":1,
+    // "image":"greentea.jpg"},
 
-     {"name":"BRU Coffee",
-    "price":60,
-    "quantity":1,
-    "image":"bru.jpg"},];
+    //  {"name":"BRU Coffee",
+    // "price":60,
+    // "quantity":1,
+    // "image":"bru.jpg"},
+    ];
 
   void print_list(){
     if(mybox.get(1)!=null){
@@ -65,6 +67,8 @@ class _CartPageState extends State<CartPage> {
                     color: Colors.grey[200],
                     border: Border.all()
                   ),
+                  child: ClipRRect(borderRadius: BorderRadius.circular(100),
+                    child: Image.asset('./images/pro.jpg'),),
                 ),
                 Container(
                   height: 50,
@@ -138,7 +142,9 @@ class _CartPageState extends State<CartPage> {
                         )
                       ],
                                 color: Colors.white),
-                                child: ClipRRect(borderRadius: BorderRadius.circular(100), child: Image.asset("./images/${itemslist[index]["image"]}",fit: BoxFit.cover,),),
+                                child:
+                                 ClipRRect(borderRadius: BorderRadius.circular(100),
+                                  child: Image.asset("./images/${itemslist[index]["image"]}",fit: BoxFit.cover,),),
                               ),
                               SizedBox(height: 10,),
                               // =============================================== NAME
@@ -179,15 +185,20 @@ class _CartPageState extends State<CartPage> {
                                   ),
                               ),
                                 // =============================================== VOLUME
-                                SizedBox(height: 10,),
+                                SizedBox(height: 13,),
                                 Container(height: 20,width: double.infinity,
                                 padding: EdgeInsets.only(left: 20),
                                 child: Row(children: [
                                   Text("Volume: ",style: TextStyle(fontSize: 14,letterSpacing: 0,fontWeight: FontWeight.w600,color: Colors.brown[300]),),
                                   Text("160ml",style: TextStyle(fontSize: 14,letterSpacing: 0,fontWeight: FontWeight.w600,color: Colors.brown[500]))
+                                  ,
+                                  // Image.asset("./images/c.jpg")
+                                  SizedBox(width: 25,),
+                                  Icon(Icons.local_drink_outlined,color: Colors.brown,size: 17,)
+                                  
                                   ],),),
                                 // =============================================== QUANTITY
-                                SizedBox(height: 10,),
+                                SizedBox(height: 18,),
                                 Container(
                                   height: 50,
                                   width:double.infinity,
@@ -195,21 +206,51 @@ class _CartPageState extends State<CartPage> {
                                   padding: EdgeInsets.only(left: 20),
                                   child: Row(
                                     children: [
+                                         IconButton(
+                                          style: IconButton.styleFrom(
+                                            backgroundColor: Colors.grey.shade300,
+                                            shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(4))
+                                          ),
+                                          onPressed: () {
+                                        setState(() {
+                                           if( itemslist[index]["quantity"]>1){
+                                             itemslist[index]["quantity"] --;
+                                           }
+                                          });
+                                      }, icon: Icon(Icons.exposure_minus_1,color: Colors.brown,)),
+
+                                      SizedBox(width: 1,),
+
+                                      IconButton(
+                                          style: IconButton.styleFrom(
+                                            backgroundColor: Colors.grey.shade300,
+                                            shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(4))
+                                          ),
+                                          onPressed: () {
+                                        setState(() {
+                                        itemslist[index]["quantity"] ++;
+                                          print(itemslist[index]["quantity"]);
+                                        });
+                                      }, icon: Icon(Icons.exposure_plus_1,color: Colors.brown,)),
+
+                                        SizedBox(width: 17,),
                                     Container(
                                       height: 40,
                                       width: 65,
                                       decoration: BoxDecoration(
-                                        border: Border.all(),
+                                        border: Border.all(color: Colors.brown),
                                         borderRadius: BorderRadius.circular(100)
                                       ),
                                       child: Row(
                                         children: [
-                                          SizedBox(width: 4,),
-                                          Text("Qty: ",style: TextStyle(fontSize: 14,letterSpacing: 0,fontWeight: FontWeight.w600,),),
+                                          
+                                          SizedBox(width: 5,),
+                                          Text("Qty: ",style: TextStyle(color: Colors.brown,
+                                            fontSize: 14,letterSpacing: 0,fontWeight: FontWeight.w600,),),
                                           Text(itemslist[index]["quantity"].toString(),style: TextStyle(fontSize: 14,letterSpacing: 0,fontWeight: FontWeight.w600,)),
                                         ],
                                       ),
-                                    )
+                                    ),
                                   ],),
                                 ) 
                             ],
@@ -234,149 +275,39 @@ class _CartPageState extends State<CartPage> {
               children: [
                 SizedBox(height: 35,),
                 Text("Discover  the best organic asian tea.",style: TextStyle(
-                  color: Colors.black,
+                  color:  const Color.fromARGB(255, 109, 29, 2),
                   fontWeight: FontWeight.bold,
+                  // fontFamily: "Pro",
                   fontSize: 20
                   )),
                   SizedBox(height: 15,),
 
-                Text("straight from motherland"),
+                Text("straight from motherland",style: TextStyle(
+                  fontFamily: "Pro",
+                  color: Colors.brown
+                ),),
 
                   SizedBox(height: 15,),
 
                 TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.white
+                    backgroundColor: Colors.blue,
+                    padding: EdgeInsets.only(left: 25,right: 25,top: 15,bottom: 15),
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)
+                    )
                   ),
                   onPressed: () {
                   
                 }, child: Text("Shop Now",style: TextStyle(
-                  color: Colors.black
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white
                   ),))
               ],
             ),
           )
         ],
       )
-      // ListView.builder(
-      //             itemCount: itemslist.length,
-      //             itemBuilder: (context, index) {
-      //             return Container(
-      //               height: 130,
-      //               width: double.infinity,
-      //               margin: EdgeInsets.only(top: 18),
-      //               padding: EdgeInsets.only(left: 15,right: 15),
-      //               decoration: BoxDecoration(
-      //                 boxShadow: [BoxShadow(
-      //                   color: Colors.brown.shade200,
-      //                   blurRadius: 5,spreadRadius: 4,
-      //                   offset: Offset(0,5)
-      //                 )],
-      //                 border: Border.all(width: 1,color: const Color.fromARGB(255, 156, 8, 8)),
-      //                 borderRadius: BorderRadius.circular(15),
-      //                 color:  Colors.white
-      //               ),
-      //               child: Row(children: [
-      //                 Container(
-      //                   height: 110,
-      //                   width: 125,
-      //                   decoration: BoxDecoration(
-      //                     color: const Color.fromARGB(255, 143, 118, 109),
-      //                   border: Border.all(),
-      //                   borderRadius: BorderRadius.circular(10)),
-      //                   child:ClipRRect(borderRadius: BorderRadius.circular(10),
-      //                     child: Image.asset("./images/${itemslist[index]["image"]}",fit: BoxFit.cover,),),
-      //                 ),
-      //                 SizedBox(width: 10,),
-      //                 Container(
-      //                   height: 110,
-      //                   width: 150,
-      //                   // color: Colors.amber,
-      //                   child: Column(
-      //                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //                     children: [
-      //                       Text("${itemslist[index]["name"]}",
-      //                       style: TextStyle(
-      //                         // color: const Color.fromARGB(255, 109, 29, 2),
-      //                         fontSize: 20,
-      //                         letterSpacing: 1,
-      //                         wordSpacing: 1,
-      //                         shadows: [Shadow(color: Colors.brown.shade200,blurRadius: 2,offset: Offset(1, 1))],
-      //                         fontWeight: FontWeight.bold
-      //                       ),),
-
-      //                       SizedBox(height: 10,),
-      //                       Row(
-      //                         children: [
-      //                           SizedBox(width: 15,),
-      //                           Container(
-      //                             height: 30,
-      //                             width: 30,
-      //                             child: ClipRRect(
-      //                               borderRadius: BorderRadius.circular(100),
-      //                               child: Image.asset("./images/rupees.jpg"),)),
-      //                           Text(itemslist[index]["price"].toString(),
-      //                           style: TextStyle(fontWeight: FontWeight.bold),),
-      //                           SizedBox(width: 63,),
-      //                           Icon(Icons.coffee_maker_outlined,color: const Color.fromARGB(255, 150, 50, 13),size: 18,)
-      //                         ],
-      //                       )
-      //                     ],
-      //                   )),
-      //                   Container(
-      //                     height: 110,
-      //                     width: 150,
-      //                     // color: const Color.fromARGB(255, 77, 69, 45),
-      //                     child: Column(
-      //                       mainAxisAlignment: MainAxisAlignment.center,
-      //                       children: [
-      //                         Row(
-      //                           mainAxisAlignment: MainAxisAlignment.center,
-      //                           children: [
-      //                             IconButton(alignment: Alignment.topCenter,
-      //                               onPressed: () {
-      //                                 setState(() {
-      //                                  if( itemslist[index]["quantity"]>1){
-      //                                    itemslist[index]["quantity"] --;
-      //                                  }
-      //                                 });
-                                    
-      //                             }, icon: Icon(Icons.minimize)),
-      //                             SizedBox(width: 8,),
-      //                             Text(itemslist[index]["quantity"].toString(),
-      //                             style: TextStyle(fontWeight: FontWeight.bold),),
-      //                             SizedBox(width: 8,),
-      //                               IconButton(onPressed: () {
-      //                                 print(itemslist[index]["image"]);
-      //                               // setState(() {
-      //                               // items_list[index]["quantity"] ++;
-      //                               //   print(items_list[index]["quantity"]);
-      //                               // });
-      //                             }, icon: Icon(Icons.add)),
-      //                           ],
-      //                         ),
-      //                         SizedBox(height: 8,),
-      //                         TextButton(
-      //                           style: TextButton.styleFrom(
-      //                             foregroundColor: const Color.fromARGB(255, 109, 29, 2),
-      //                             backgroundColor: const Color.fromARGB(255, 143, 85, 37),
-                                  
-      //                             // foregroundColor: Colors.white
-      //                           ),
-      //                           onPressed: () {
-      //                           //   setState(() {
-      //                           // choose_list.add(items_list[index]);
-      //                           // });
-      //                           // print(choose_list);
-      //                           // addtocart();
-      //                         }, child: Text("My Cart",style: TextStyle(fontWeight: FontWeight.bold,
-      //                         color: Colors.white),)),
-      //                       ],
-      //                     ),
-      //                   )
-      //               ],),
-      //             );
-      //           },),
     );
   }
 }
