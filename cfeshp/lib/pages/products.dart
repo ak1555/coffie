@@ -16,10 +16,10 @@ class _ProductsState extends State<Products> {
   List items_list=[
     {
       "id":111,
-      "name":"Green Tea",
-    "price":50,
+      "name":"Cappiccino",
+    "price":350,
     "quantity":1,
-    "image":"greentea.jpg"},
+    "image":"capic.jpeg"},
 
      {"id":222,
       "name":"BRU Coffee",
@@ -31,7 +31,38 @@ class _ProductsState extends State<Products> {
       "name":"Horlicks Coffee",
     "price":75,
     "quantity":1,
-    "image":"horlicks.jpg"}
+    "image":"horlicks.jpg"},
+
+     {"id":444,
+      "name":"Beaten Coffee",
+    "price":197,
+    "quantity":1,
+    "image":"beatencoff.jpg"},
+
+     {"id":555,
+      "name":"Green Tea",
+    "price":215,
+    "quantity":1,
+    "image":"greentea.jpg"},
+
+     {"id":666,
+      "name":" Lattee",
+    "price":75,
+    "quantity":1,
+    "image":"lattee.jpg"},
+
+    {"id":777,
+      "name":" Hungyan",
+    "price":375,
+    "quantity":1,
+    "image":"hungyan.jpg"}
+    ,
+     {"id":555,
+      "name":"Green Tea",
+    "price":215,
+    "quantity":1,
+    "image":"greentea.jpg"},
+
   ];
 
   List choose_list=[];
@@ -77,7 +108,7 @@ class _ProductsState extends State<Products> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Colors.brown.shade100,
+      backgroundColor:Colors.grey.shade100,
       // appBar: AppBar(
       //    backgroundColor:Colors.brown.shade100,
       //   title: Center(child: Text("COFFIEE CART",style: TextStyle(color: Colors.black),),),
@@ -89,9 +120,14 @@ class _ProductsState extends State<Products> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-            colors:[Colors.brown.shade300,
-            Colors.brown.shade100,
-            Colors.brown.shade100])
+            colors:[Colors.brown.shade600,
+            Colors.white,
+            Colors.white,
+            Colors.white,
+            Colors.white,
+            Colors.white,
+            Colors.white,
+            ])
          ),
          child: Column(
           children: [
@@ -107,42 +143,12 @@ class _ProductsState extends State<Products> {
               letterSpacing: 1,height: 2.5),
               ),
               ),
-              // Container(
-              //   height: 190,
-              //   width: double.infinity,
-              //   margin: EdgeInsets.only(left: 15,right: 15),
-              //   decoration: BoxDecoration(
-              //     color: const Color.fromARGB(255, 109, 29, 2),
-              //     borderRadius: BorderRadius.circular(15)
-              //   ),
-              //   child: Row(children: [
-              //     Lottie.network("https://lottie.host/7786243e-5488-4a6d-8e21-38f0ad882e11/dhHDkDNLr4.json",height: 130),
-              //     Container(child: Column(
-              //       mainAxisAlignment: MainAxisAlignment.center,
-              //       children: [
-              //         Text("Enjoy Premium Brew ",style: TextStyle(color: Colors.white,
-              //          shadows: [Shadow(color: Colors.white,blurRadius: 2,offset: Offset(1, 1))],
-              //          letterSpacing: 1,wordSpacing: 1,
-              //          fontSize: 16,
-              //          fontFamily:"Edu"
-              //          ),),
-
-              //         Text("With the Coolest of Flavours",style: TextStyle(color: Colors.white,
-              //          shadows: [Shadow(color: Colors.white,blurRadius: 2,offset: Offset(1, 1))],
-              //          letterSpacing: 1,wordSpacing: 1,
-              //          fontSize: 13,
-              //           fontFamily:"Edu"
-              //          ))
-              //       ],
-              //     ))
-              //   ],),
-              // ),
               SizedBox(height:10,),
               Container(
                 // color: Colors.amber,
                 margin: EdgeInsets.only(left: 8,right: 8),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.grey[100],
                   borderRadius: BorderRadius.vertical(top: Radius.circular(65))
                 ),
                 child: Column(
@@ -184,7 +190,7 @@ class _ProductsState extends State<Products> {
                   
                   itemCount: items_list.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2
-                  ,childAspectRatio: 2.5/4.5,
+                  ,childAspectRatio: 2.5/4.2,
                   crossAxisSpacing: 5,
                   mainAxisSpacing: 10
                   ),
@@ -193,6 +199,7 @@ class _ProductsState extends State<Products> {
                     // margin: EdgeInsets.only(left: 2.5,right: 2.5),
                     width: 210,
                     decoration: BoxDecoration(
+                      border: Border.all(color: Colors.brown.shade300),
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(25),
                       gradient: LinearGradient(begin: Alignment.topLeft,
@@ -210,7 +217,7 @@ class _ProductsState extends State<Products> {
                               // =========================== IMAGE
                               SizedBox(height: 5,),
                               Container(
-                                height: 94,width: 94,
+                                height: 100,width: 100,
                                 padding: EdgeInsets.all(1.5),
                                 
                                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(100),
@@ -279,61 +286,6 @@ class _ProductsState extends State<Products> {
                                   ],),),
                                 // =============================================== QUANTITY
                                 SizedBox(height: 18,),
-                                // Container(
-                                //   height: 50,
-                                //   width:double.infinity,
-                                //   alignment: Alignment.center,
-                                //   padding: EdgeInsets.only(left: 20),
-                                //   child: Row(
-                                //     children: [
-                                //          IconButton(
-                                //           style: IconButton.styleFrom(
-                                //             backgroundColor: Colors.grey.shade300,
-                                //             shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(4))
-                                //           ),
-                                //           onPressed: () {
-                                //         setState(() {
-                                //            if( items_list[index]["quantity"]>1){
-                                //              items_list[index]["quantity"] --;
-                                //            }
-                                //           });
-                                //       }, icon: Icon(Icons.exposure_minus_1,color: Colors.brown,)),
-
-                                //       SizedBox(width: 1,),
-
-                                //       IconButton(
-                                //           style: IconButton.styleFrom(
-                                //             backgroundColor: Colors.grey.shade300,
-                                //             shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(4))
-                                //           ),
-                                //           onPressed: () {
-                                //         setState(() {
-                                //         items_list[index]["quantity"] ++;
-                                //           print(items_list[index]["quantity"]);
-                                //         });
-                                //       }, icon: Icon(Icons.exposure_plus_1,color: Colors.brown,)),
-
-                                //         SizedBox(width: 17,),
-                                //     Container(
-                                //       height: 40,
-                                //       width: 65,
-                                //       decoration: BoxDecoration(
-                                //         border: Border.all(color: Colors.brown),
-                                //         borderRadius: BorderRadius.circular(100)
-                                //       ),
-                                //       child: Row(
-                                //         children: [
-                                          
-                                //           SizedBox(width: 5,),
-                                //           Text("Qty: ",style: TextStyle(color: Colors.brown,
-                                //             fontSize: 14,letterSpacing: 0,fontWeight: FontWeight.w600,),),
-                                //           Text(items_list[index]["quantity"].toString(),style: TextStyle(fontSize: 14,letterSpacing: 0,fontWeight: FontWeight.w600,)),
-                                //         ],
-                                //       ),
-                                //     ),
-                                //   ],),
-                                // ) 
-
                                   TextButton(
                                 style: TextButton.styleFrom(
                                   foregroundColor: const Color.fromARGB(255, 109, 29, 2),
@@ -342,116 +294,10 @@ class _ProductsState extends State<Products> {
                                   // foregroundColor: Colors.white
                                 ),
                                 onPressed: () {
-// if(mybox.get(1)!=null){
-//   takeToList();
-//   if(choose_list[index]["id"]!=items_list[index]["id"]){
-//     print(items_list[index]["id"]);
-//   }
-// }
+
 checkid(items_list[index]["id"],items_list[index]);
 
 
-//  if(mybox.get(1)!=null){
-//       setState(() {
-//         choose_list=mybox.get(1);
-//       });
-//       int j = choose_list.length;
-//       int count=0;
-//       for(int i=0;i<=j;i++){
-//         if(items_list[index]==choose_list[count]){
-//           showDialog(context: context, builder: (context) {
-//                                       return AlertDialog(
-//                                         title: Text("OOPS!!!"),
-//                                         content: Text("Item Already In Cart"),
-//                                       );
-//                                     },);
-                                  
-//           // break;
-//         }else{
-//           setState(() {
-//             choose_list.add(items_list[index]);
-//           });
-//               mybox.put(1, choose_list);
-//         }
-//         count++;
-//       }
-//       print(choose_list);
-//     }else{
-//       setState(() {
-//             choose_list.add(items_list[index]);
-//           });
-//               mybox.put(1, choose_list);
-//               print("null listed+ add");
-// print(choose_list);
-//     }
-
-// [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
-//  if(mybox.get(1)!=null){
-//       setState(() {
-//         choose_list=mybox.get(1);
-//       });
-//       int j = choose_list.length;
-//       int count=0;
-//       for(int i=0;i<=j;i++){
-//         if(items_list[index]==choose_list[count]){
-//           showDialog(context: context, builder: (context) {
-//                     return AlertDialog(
-//                     title: Text("OOPS!!!"),
-//                     content: Text("Item Already In Cart"),
-//                     );
-//                    },);    
-//           // break;
-//           // continue;
-//           break;
-//         }else{
-//           setState(() {
-//             choose_list.add(items_list[index]);
-//           });
-//               mybox.put(1, choose_list);
-//         }
-//         count++;
-//       }
-//       print(choose_list);
-//       print("data");
-//     }else{
-//       setState(() {
-//             choose_list.add(items_list[index]);
-//           });
-//               mybox.put(1, choose_list);
-//               print("null listed+ add");
-// print(choose_list);
-// print("object");
-//     }
-
-
-// [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
-
-                                //  if(mybox.get(1)!=null){
-                                //   print("bleach");
-                                //   takeToList();
-                                //   if(items_list[index]["id"]==choose_list[index]["id"]){
-                                //     showDialog(context: context, builder: (context) {
-                                //       return AlertDialog(
-                                //         title: Text("OOPS!!!"),
-                                //         content: Text("Item Already In Cart"),
-                                //       );
-                                //     },);
-                                //   }
-                                //   else{
-                                //     print("naruto");
-                                //     setState(() {   
-                                // choose_list.add(items_list[index]);
-                                // });
-                                //   addtocart();
-                                //   }
-                                //  }else{
-                                  
-                                //     setState(() {   
-                                // choose_list.add(items_list[index]);
-                                // });
-                                // addtocart();
-                                //  }
-                                // print(choose_list);
                                 
                               }, child: Text("To cart",style: TextStyle(fontWeight: FontWeight.bold),)),
                             ],
@@ -459,10 +305,7 @@ checkid(items_list[index]["id"],items_list[index]);
                     );
                  },)
               )
-              //   //  [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
-                // [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
-                // [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
- ],
+            ],
                 ),
               ),
           ],
